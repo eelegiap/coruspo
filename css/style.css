@@ -1,0 +1,117 @@
+body {
+    padding-left: 0vh;
+    padding-top: 3vh;
+    /* padding-bottom: 20px; */
+}
+
+#searchCol {
+    padding-left: 6vh;
+}
+
+form {
+    width: 25%
+}
+
+#results {
+    padding-right: 10vh;
+}
+#resultCt {
+    font-size: 12px;
+    padding-bottom: 3vh;
+}
+#resultsContainer {
+    /* max-height: 500px; */
+    overflow: scroll
+}
+/* .result {
+    padding-left: 3vh;
+} */
+.poemResult {
+    cursor: pointer;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+#poemContainer {
+    /* max-height: 500px; */
+    overflow-y: auto;
+}
+#poemMeta {
+    padding-top: 2vh;
+    padding-left: 5vh;
+    padding-bottom: 2vh
+}
+#poemTxt {
+    padding-left: 4vh;
+    padding-bottom: 10vh;
+}
+
+.input-group {
+    max-width: 75%;
+    padding-bottom: 1vh
+}
+
+/* Tooltip text */
+.titleTooltip .tooltiptext {
+    visibility: hidden;
+    position: absolute;
+    text-align: left;
+    width: fit-content;
+    height: fit-content;
+    padding: 2px;
+    padding-right: 15px;
+    font: 12px sans-serif;
+    background: #e5ffff;
+    border: 1px solid gray;
+    border-radius: 8px;
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+.titleTooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.token mark {
+    display: contents;
+}
+
+input,
+.dropdown-toggle {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.searchBar {
+    min-height: 50px
+}
+
+#search {
+    background-color: #06d6a0;
+}
+
+
+#random {
+    margin-top: 3vh;
+    width: 25%;
+    float: left
+}
+.border {
+    border: 2px solid black;   
+}
+#dropdownP {
+    text-align:left;
+    padding-left:225px
+}
+hr {
+    border: 1px dotted black;
+    border-style: none none dotted; 
+    color: #fff; 
+    background-color: #fff;
+    width:50%;
+    margin-left: 0 auto;
+    margin-right: 0 auto;
+}

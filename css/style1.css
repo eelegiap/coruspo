@@ -1,0 +1,119 @@
+/* General styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    margin-top: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #2a9d8f;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: #e76f51;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Header styling */
+header {
+    background-color: #2a9d8f;
+    color: #fff;
+    padding: 1rem 0;
+}
+
+header h1 {
+    text-align: center;
+    margin: 0;
+}
+
+/* Main content styling */
+#main-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+#poemContainer, #resultsContainer {
+    padding: 1rem;
+    background-color: #f5f5f5;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: scroll;
+}
+
+#poemContainer {
+    flex: 2;
+}
+
+#resultsContainer {
+    flex: 1;
+}
+
+/* Search form styling */
+#search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+#search-form input,
+#search-form select {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#search-form button {
+    padding: 0.5rem;
+    background-color: #2a9d8f;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#search-form button:hover {
+    background-color: #e76f51;
+}
+
+/* Poem result styling */
+.poemResult {
+    border-bottom: 1px solid #ccc;
+    padding: 1rem 0;
+}
+
+.poemResult:last-child {
+    border-bottom: none;
+}
+
+.poemResult.border {
+    border-left: 3px solid #e76f51;
+    padding-left: calc(1rem - 3px);
+}
+
+.result {
+    margin: 0;
+}
+
+.mark {
+    background-color: #2a9d8f;
+    color: #fff;
+    padding: 2px;
+}
