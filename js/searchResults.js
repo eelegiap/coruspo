@@ -17,16 +17,24 @@ class SearchResults {
         this.wrangleData()
     }
 
-    wrangleData() {
-        console.log('input at begin',input)
-        var input = d3.select('#form1').property('value')
+    wrangleData(givenAuthor) {
+        console.log('input at begin', givenAuthor)
+        var input; var dropdownVal
+
+        if (givenAuthor != undefined) {
+            d3.select('#form1').property('value',givenAuthor)
+            d3.select('#dropdown').property("value",'author')
+        }
+
+        input = d3.select('#form1').property('value')
         if (input == '' || input == undefined) {
             input = d3.select('#thisauthor').text()
         }
-        var dropdownVal = d3.select('#dropdown').property("value")
-        
+        dropdownVal = d3.select('#dropdown').property("value")
+        console.log('dropdownVal', dropdownVal)
+
         let vis = this;
-        
+
         if (dropdownVal == 'keyword') {
             input = input.toLowerCase()
             var forms = new Set()
@@ -55,22 +63,23 @@ class SearchResults {
                 return inputFound
             })
             // dataByInput = dataByInput.sort((a, b) => a.Author.split(' ')[1] > b.Author.split(' ')[1])
-            
+
         } else {
-            console.log('input', input)
+            console.log('input in else', input)
+            console.log('dealing with this data',vis.data)
             var dataByInput = vis.data.filter(function (d) {
                 if (!input) {
                     return false
                 }
                 if (input.split(' ').length == 1) {
-                    if (d.Author.split(' ').length>1) {
-                    return d.Author.split(' ')[1].toLowerCase().trim() == input.toLowerCase().trim()
-                }
+                    if (d.Author.split(' ').length > 1) {
+                        return d.Author.split(' ')[1].toLowerCase().trim() == input.toLowerCase().trim()
+                    }
                 }
                 return d.Author.toLowerCase().trim() == input.toLowerCase().trim()
             })
         }
-        console.log(dataByInput)
+        console.log('databyinput', dataByInput)
         vis.updateVis(dataByInput);
 
     }
@@ -84,7 +93,7 @@ class SearchResults {
         let vis = this;
         var input = d3.select('#form1').property('value')
         var dropdownVal = d3.select('#dropdown').property("value")
-        console.log('thisinput',input)
+        console.log('thisinput', input)
         d3.selectAll("#results *").remove();
         d3.select('#resultCt').html('')
         var searchSubtitle = ''
@@ -96,10 +105,9 @@ class SearchResults {
             }
             searchSubtitle = 'written by'
         }
-        d3.select('#resultCt').html(`${data.length} poems ${searchSubtitle} ${input}. 
-                ${data.filter(d => d['Before or after'] == 'Before').length} from before invasion, ${data.filter(d => d['Before or after'] == 'After').length} from after invasion.`)
+        d3.select('#resultCt').html(`${data.length} poems ${searchSubtitle} ${input}.`)
 
-        
+
         var author2info = new Object()
         var birthplaceCts = new Object()
         this.authorData.map(function (d) { birthplaceCts[d.Country] = 0; author2info[d.Author] = d })
@@ -114,16 +122,16 @@ class SearchResults {
             'No War Poetry': 1650578403721,
             'ROAR V2': 1656109878113,
             'ROAR V3': 1661380278113,
-            
+
         }
         data.map(function (d) {
             if (Object.keys(dateObj).includes(d.Source)) {
                 d.date = dateObj[d.Source]
             }
-             else {
+            else {
                 d.date = d['Date posted']
             }
-            if (['None','','N/A'].includes(d.date)) {
+            if (['None', '', 'N/A'].includes(d.date)) {
                 if (d['Before or after'] == 'Before') {
                     d.date = 1645654419000
                 } else {
@@ -131,12 +139,14 @@ class SearchResults {
                 }
             }
 
-            
+
             //  d.dateStr = `${parseDate(new Date(d.date))}`
         })
-        
-        data = data.sort((a, b) => a.date - b.date);
 
+        data = data.sort((a, b) => a.date - b.date);
+        if (data.length > 0) {
+            myText.wrangleData(data[0].UniqueIndex)
+        }
 
         var resultsByPoem = d3.select('#results').selectAll('.poemResult')
             .data(data)
@@ -158,7 +168,7 @@ class SearchResults {
                 } else {
                     city = aInfo.City; country = aInfo.Country;
                 }
-                
+
                 var date = ` (${parseDate(new Date(d.date))})`
                 return `<span style='font-size: 12px'><span style='color:${color}'>${d['Before or after']}${date}:</span>
                         <b>${d.Author}</b>, <i>${d.Source}</i> (${city}, ${country}) [${d.UniqueIndex}]</span>`
@@ -182,26 +192,27 @@ class SearchResults {
                     .append('p')
                     .attr('id', p.UniqueIndex)
                     .attr('class', 'result')
-                    .html(function(d) {
-                    var htmlLines = d.Text.split('\n')
-                    var goodHtmlLines = []
-                    htmlLines.forEach(function(line) {
-                        var newLine = line.replaceAll('*','').replaceAll(' ','')
-                        if (!['',' ','\n'].includes(newLine)) {
-                            goodHtmlLines.push(line.slice(0,100))
-                        }
-                    })
-                    var htmlText = goodHtmlLines.slice(0,1).join('<br>')
-                    return `<span style='font-size: 14px'></span>${htmlText}
+                    .html(function (d) {
+                        var htmlLines = d.Text.split('\n')
+                        var goodHtmlLines = []
+                        htmlLines.forEach(function (line) {
+                            var newLine = line.replaceAll('*', '').replaceAll(' ', '')
+                            if (!['', ' ', '\n'].includes(newLine)) {
+                                goodHtmlLines.push(line.slice(0, 100))
+                            }
+                        })
+                        var htmlText = goodHtmlLines.slice(0, 1).join('<br>')
+                        return `<span style='font-size: 14px'></span>${htmlText}
                         <span style='font-size: 14px'> ...</span>`
-                })
+                    })
             }
 
         })
 
         d3.selectAll('.poemResult').on('click', function () {
             var uniqueID = d3.select(this).attr('id').replaceAll('id', '')
-            window.history.pushState('object or string', 'Title', `/thesis-code/search/?q=${uniqueID}`)
+            // window.history.pushState('object or string', 'Title', `/search/?q=${uniqueID}`)
+            console.log(uniqueID)
             myText.wrangleData(uniqueID)
         }).on('mouseover', function () {
             d3.select(this).transition().style('background-color', 'rgba(176, 196, 222, 0.302)')

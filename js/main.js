@@ -1,3 +1,22 @@
+function showSection(id) {
+    const sections = document.getElementsByClassName('section');
+    for (let i = 0; i < sections.length; i++) {
+        sections[i].style.display = 'none';
+    }
+    document.getElementById(id).style.display = 'block';
+}
+
+// Load data from data.json
+async function loadData() {
+    const response = await fetch('data.json');
+    const data = await response.json();
+
+    // Manipulate the data to display in the corresponding sections
+}
+
+// Call loadData when the page is loaded
+window.addEventListener('DOMContentLoaded', loadData);
+
 
 d3.select('#poemContainer').style('max-height', $(window).height() * .6 + 'px')
 d3.select('#resultsContainer').style('max-height', $(window).height() * .55 + 'px')
@@ -13,6 +32,41 @@ Promise.all(promises)
     .then(function (data) { initMainPage(data) })
     .catch(function (err) { console.log(err) });
 
+var authorSet = new Set()
+function initAuthorList(poemData) {
+    poemData.forEach(function (d) {
+        authorSet.add(d.Author)
+    })
+    var poetNames = Array.from(authorSet)
+    const sortedPoets = poetNames.sort(function (a, b) {
+        var aLast; var bLast
+        if (a.split(' ').length == 2) {
+            aLast = a.split(' ')[1]
+        } else {
+            aLast = a
+        }
+        if (b.split(' ').length == 2) {
+            bLast = b.split(' ')[1]
+        } else {
+            bLast = b
+        }
+        return aLast.localeCompare(bLast)
+    });
+
+    const poetList = d3.select('#poetList')
+        .append('ul');
+
+    var pNames = poetList.selectAll('li')
+        .data(sortedPoets)
+        .enter()
+        .append('li')
+        .attr('class', 'poetName')
+        .text(d => d)
+        .on('click', function (event, d) {
+            showSection('search')
+            updateResults(d)
+        });
+}
 
 let input = ''
 // initMainPage
@@ -20,26 +74,29 @@ function initMainPage(data) {
     // initialize
     let poemData = data[0];
     let authorData = data[1];
+    // filter to after only
+    poemData = poemData.filter(d => d['Before or after'] == 'After')
+    initAuthorList(poemData)
     myText = new TextPanel(poemData, authorData);
     mySearchResults = new SearchResults(poemData, input, authorData)
     const q = window.location.href.split('=')[1]
     myText.wrangleData(+q)
     updateResults()
-    // poem nlp
-    const lemmatizedPoems = preprocessPoems(data);
-    calculateTfIdf(lemmatizedPoems);
+    // // // poem nlp // //  // 
+    // const lemmatizedPoems = preprocessPoems(data);
+    // calculateTfIdf(lemmatizedPoems);
 
-    const targetPoemIndex = 0; // Index of the poem you want to find similar poems for
-    const similarPoems = findSimilarPoems(targetPoemIndex, lemmatizedPoems);
+    // const targetPoemIndex = 0; // Index of the poem you want to find similar poems for
+    // const similarPoems = findSimilarPoems(targetPoemIndex, lemmatizedPoems);
 
-    console.log("Similar poems to:", poems[0].title);
-    similarPoems.forEach(poem => {
-        console.log(poems[poem.index].title, '- Similarity:', poem.similarity.toFixed(2));
-    });
+    // console.log("Similar poems to:", poems[0].title);
+    // similarPoems.forEach(poem => {
+    //     console.log(poems[poem.index].title, '- Similarity:', poem.similarity.toFixed(2));
+    // });
 }
 
-function updateResults() {
-    mySearchResults.wrangleData();
+function updateResults(givenAuthor) {
+    mySearchResults.wrangleData(givenAuthor);
 }
 
 d3.select('#search').on('click', function () {
@@ -48,7 +105,6 @@ d3.select('#search').on('click', function () {
 
 d3.selectAll('#dropdown').on('change', function () {
     var val = d3.select('#dropdown').property("value")
-    d3.select('#searchLabel').text('Search by ' + val)
     updateResults('Not specified')
 })
 

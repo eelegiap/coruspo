@@ -1,17 +1,44 @@
 body {
-    padding-left: 0vh;
-    padding-top: 3vh;
-    /* padding-bottom: 20px; */
+    font-family: 'DM Sans', sans-serif;
+    background-color: WhiteSmoke;
 }
 
-#searchCol {
-    padding-left: 6vh;
+#navbar {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 1rem;
+    background-color: RoyalBlue;
 }
 
-form {
-    width: 25%
+#navbar li a {
+    color: white;
+    text-decoration: none;
 }
 
+#navbar li a:hover {
+    text-decoration: underline;
+}
+
+#content {
+    padding: 2rem;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+    /* adjust as desired */
+}
+
+.grid-item-1-2 {
+    /* Add any common styles for the columns if needed */
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
 #results {
     padding-right: 10vh;
 }
@@ -32,11 +59,6 @@ form {
     padding-left: 10px;
     padding-top: 5px;
 }
-
-#poemContainer {
-    /* max-height: 500px; */
-    overflow-y: auto;
-}
 #poemMeta {
     padding-top: 2vh;
     padding-left: 5vh;
@@ -46,72 +68,7 @@ form {
     padding-left: 4vh;
     padding-bottom: 10vh;
 }
-
-.input-group {
-    max-width: 75%;
-    padding-bottom: 1vh
-}
-
-/* Tooltip text */
-.titleTooltip .tooltiptext {
-    visibility: hidden;
-    position: absolute;
-    text-align: left;
-    width: fit-content;
-    height: fit-content;
-    padding: 2px;
-    padding-right: 15px;
-    font: 12px sans-serif;
-    background: #e5ffff;
-    border: 1px solid gray;
-    border-radius: 8px;
-    pointer-events: none;
-
-    z-index: 1;
-}
-
-.titleTooltip:hover .tooltiptext {
-    visibility: visible;
-}
-
-.token mark {
-    display: contents;
-}
-
-input,
-.dropdown-toggle {
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-}
-
-.searchBar {
-    min-height: 50px
-}
-
-#search {
-    background-color: #06d6a0;
-}
-
-
-#random {
-    margin-top: 3vh;
-    width: 25%;
-    float: left
-}
-.border {
-    border: 2px solid black;   
-}
-#dropdownP {
-    text-align:left;
-    padding-left:225px
-}
-hr {
-    border: 1px dotted black;
-    border-style: none none dotted; 
-    color: #fff; 
-    background-color: #fff;
-    width:50%;
-    margin-left: 0 auto;
-    margin-right: 0 auto;
+.poetName {
+    cursor: pointer;
+    text-decoration: underline;
 }
