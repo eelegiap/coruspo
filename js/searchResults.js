@@ -170,7 +170,7 @@ class SearchResults {
                 }
 
                 var date = ` (${parseDate(new Date(d.date))})`
-                return `<span style='font-size: 12px'><span style='color:${color}'>${d['Before or after']}${date}:</span>
+                return `<span style='font-size: 12px'><span style='color:${color}'>${date}:</span>
                         <b>${d.Author}</b>, <i>${d.Source}</i> (${city}, ${country}) [${d.UniqueIndex}]</span>`
             })
 
