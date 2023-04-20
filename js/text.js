@@ -54,7 +54,7 @@ class TextPanel {
             // no citation info
             citationinfo = ''
             // Author first name last name, “Page Title,” Website Name, Month Day, Year, URL.
-            return citationinfo + `<span style='color:${color}'>${thisPoem['Before or after']} (${date}):</span>
+            return citationinfo + `<span style='color:${color}'>${date}:</span>
                     <b><span id='thisauthor'>${thisPoem.Author}</span></b>, <i>${thisPoem.Source}</i>
                     <br>Author birthplace: ${authorInfo.City}, ${authorInfo.Country}
                     <br>Poem ID: ${thisPoem.UniqueIndex}<hr>`

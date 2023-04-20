@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Mulish&family=Source+Serif+Pro&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
 
@@ -143,8 +144,16 @@
 
             <div id="poets" class="section" style="display:none">
                 <!-- Poets content -->
-                <h3>поэты / Poets</h3>
-                <div id="poetList"></div>
+                <div class="grid-container">
+                    <div class="column">
+                        <h3>поэты / Poets</h3>
+                        <div id="poetList"></div>
+                    </div>
+                    <div class="column">
+                        <h3>Распределение авторов по месту рождения</h3>
+                        <p>Полная веб-страница <a href='https://eelegiap.github.io/thesis-code/authorMap/' target="_blank">здесь.</a> / Full webpage <a href='https://eelegiap.github.io/thesis-code/authorMap/' target="_blank">here.</a></p>
+                        <iframe src="https://eelegiap.github.io/thesis-code/authorMap/" width="100%" height="500px" style="border:none;"></iframe>
+                    </div>
             </div>
 
             <div id="about" class="section" style="display:none">
