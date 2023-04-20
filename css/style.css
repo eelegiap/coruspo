@@ -31,10 +31,6 @@ body {
     /* adjust as desired */
 }
 
-.grid-item-1-2 {
-    /* Add any common styles for the columns if needed */
-}
-
 .input-group {
     display: flex;
     align-items: center;

@@ -101,7 +101,7 @@ class TextPanel {
         d3.select('#poemTxt').html(forHTML)
 
         $("#poemContainer").animate({ scrollTop: 0 }, "fast");
-
+        $("body").animate({ scrollTop: 0 }, "fast");
     }
 
 }

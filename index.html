@@ -17,31 +17,96 @@
 
 <body>
     <div>
-        <h1>CoRusPo</h1>
-        <h2>Современное русскоязычное стихотворение / Contemporary Russian-language Poetry</h2>
+        <h1>СоРуПо / CoRusPo</h1>
+        <h2>Современная русскоязычная поэзия / Contemporary Russian-language Poetry</h2>
         <ul id="navbar">
-            <li><a href="#" onclick="showSection('home')">Homepage</a></li>
-            <li><a href="#" onclick="showSection('poets')">Poets</a></li>
-            <li><a href="#" onclick="showSection('search')">Search</a></li>
-            <li><a href="#" onclick="showSection('about')">About</a></li>
+            <li><a href="#" onclick="showSection('home')">домашняя страница / Homepage</a></li>
+            <li><a href="#" onclick="showSection('poets')">поэты / Poets</a></li>
+            <li><a href="#" onclick="showSection('search')">поиск / Search</a></li>
+            <li><a href="#" onclick="showSection('about')">о сайте / About</a></li>
         </ul>
 
         <div id="content">
             <div id="home" class="section">
                 <!-- Homepage content -->
-                <h3>Homepage</h3>
-                <p>The archive contains Russian-language poems posted to the internet (Facebook, Telegram, blogs) from
-                    after February 24th, 2022.</p>
+                <h3>домашняя страница / Homepage</h3>
+                <div class="grid-container">
+                    <div class="column">
+                        <p>Архив содержит русскоязычные стихи, размещенные в сети Интернет (Facebook, Telegram, блоги)
+                            после 24 февраля 2022 года.</p>
+                        <h3>Стихотворение дня</h3>
+                        <h4>Автор: Максим Семенов</h4>
+                        <span>Как Дарвин уплыл на Галапагосы,</span><br>
+                        <span>так мы убегаем в пространство нашего языка.</span><br>
+                        <span></span><br>
+                        <span>Этот язык — целый мир,</span><br>
+                        <span>в нём страны и их границы,</span><br>
+                        <span>пики коммунизма и провалы</span><br>
+                        <span>милитаристской риторики,</span><br>
+                        <span>под курганами дремлют</span><br>
+                        <span>потерявшие звуки буквы,</span><br>
+                        <span>по лесам и топям гуляют</span><br>
+                        <span>звуки, лишённые букв и знаков.</span><br>
+                        <span></span><br>
+                        <span>В этом мире</span><br>
+                        <span>«Я люблю тебя» —</span><br>
+                        <span>просто набор из трёх слов,</span><br>
+                        <span>а «где-то идёт война» —</span><br>
+                        <span>констатация очевидных фактов.</span><br>
+                        <span></span><br>
+                        <span>И сейчас,</span><br>
+                        <span>поднявшись на переводной уступ,</span><br>
+                        <span>я вижу, как в свете кометы</span><br>
+                        <span>1812-го года</span><br>
+                        <span>гибнут слова и смыслы,</span><br>
+                        <span>а корпусы текстов</span><br>
+                        <span>распадаются на части в пылу сражения.</span><br>
+                    </div>
+                    <div class="column">
+                        <p>The archive contains Russian-language poems posted to the internet (Facebook, Telegram,
+                            blogs) from after February 24th, 2022.</p>
+                        <h3>Poem of the day</h3>
+                        <h4>Author: Maksim Semenov</h4>
+                        <span>How Darwin sailed to the Galapagos</span><br>
+                        <span>so we escape into the space </span><br>
+                        <span>of our language.</span><br>
+                        <span></span><br>
+                        <span>This language is the whole world,</span><br>
+                        <span>it contains countries and their borders,</span><br>
+                        <span>peaks of communism and failures</span><br>
+                        <span>of militaristic rhetoric,</span><br>
+                        <span>under the burial mounds slumber </span><br>
+                        <span>letters that have lost their sound,</span><br>
+                        <span>through the forests and swamps</span><br>
+                        <span>walk sounds </span><br>
+                        <span>devoid of letters and signs.</span><br>
+                        <span></span><br>
+                        <span>In this world</span><br>
+                        <span>"I love you" is</span><br>
+                        <span>a random set of three words,</span><br>
+                        <span>and "somewhere there is a war" is</span><br>
+                        <span>a statement of obvious facts.</span><br>
+                        <span></span><br>
+                        <span>And now,</span><br>
+                        <span>rising to that shifting ledge,</span><br>
+                        <span>I see how in the light of the comet </span><br>
+                        <span>of 1812</span><br>
+                        <span>words and meanings perish,</span><br>
+                        <span>and text corpora</span><br>
+                        <span>fall apart in the heat of battle.</span><br>
+                        <span></span><br>
+                    </div>
+                </div>
+
             </div>
 
             <div id="search" class="section" style="display:none">
                 <!-- Search content -->
-                <h3>Search</h3>
-                <p>Search the archive by keyword or author name.</p>
                 <div class="grid-container">
                     <div class="grid-item-1-2">
+                        <h3>поиск / Search</h3>
+                        <p>Поиск в архиве по ключевому слову или имени автора. / Search the archive by keyword or author name.</p>
                         <!-- Content for the 1/2 column -->
-                        <div class="row">
                             <!-- <select id="dropdown"></select> -->
                             <p id="dropdownP">Search by: <select id="dropdown">
                                     <option value="author">Author</option>
@@ -61,19 +126,16 @@
                             <br>
                             <div id="resultCt"></div>
                             <br>
-                        </div>
-                        <div class="row" id="resultsContainer">
+                        <div id="resultsContainer">
                             <div id="results"></div>
                         </div>
                     </div>
                     <div class="grid-item-1-2">
                         <!-- Content for the 1/2 column -->
-                        <div class="row">
                             <div id="poemMeta"></div>
                             <div id="poemContainer">
                                 <div id="poemTxt"></div>
                             </div>
-                        </div>
                     </div>
                 </div>
 
@@ -81,12 +143,13 @@
 
             <div id="poets" class="section" style="display:none">
                 <!-- Poets content -->
-                <h3>Poets</h3>
+                <h3>поэты / Poets</h3>
                 <div id="poetList"></div>
             </div>
 
             <div id="about" class="section" style="display:none">
                 <!-- About content -->
+                <h3>о сайте / About</h3>
             </div>
         </div>
     </div>

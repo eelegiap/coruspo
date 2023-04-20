@@ -4,6 +4,11 @@ function showSection(id) {
         sections[i].style.display = 'none';
     }
     document.getElementById(id).style.display = 'block';
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+    });
 }
 
 // Load data from data.json
@@ -65,6 +70,7 @@ function initAuthorList(poemData) {
         .on('click', function (event, d) {
             showSection('search')
             updateResults(d)
+            $("body").animate({ scrollTop: 0 }, "fast");
         });
 }
 
