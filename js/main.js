@@ -84,6 +84,7 @@ function initMainPage(data) {
     let authorData = data[1];
     // filter to after only
     poemData = poemData.filter(d => d['Before or after'] == 'After')
+    console.log(poemData.length)
     initAuthorList(poemData)
     myText = new TextPanel(poemData, authorData);
     mySearchResults = new SearchResults(poemData, input, authorData)
