@@ -47,14 +47,10 @@ function initAuthorList(poemData) {
         var aLast; var bLast
         if (a.split(' ').length == 2) {
             aLast = a.split(' ')[1]
-        } else {
-            aLast = a
-        }
+        } else { aLast = a }
         if (b.split(' ').length == 2) {
             bLast = b.split(' ')[1]
-        } else {
-            bLast = b
-        }
+        } else { bLast = b }
         return aLast.localeCompare(bLast)
     });
 
@@ -69,9 +65,15 @@ function initAuthorList(poemData) {
         .text(d => d)
         .on('click', function (event, d) {
             showSection('search')
+
             updateResults(d)
             $("body").animate({ scrollTop: 0 }, "fast");
-        });
+        }).on('mouseover',function(event, d) {
+            d3.select(this).style('font-weight','bold')
+        })
+        .on('mouseout',function(event, d) {
+            d3.select(this).style('font-weight','')
+        })
 }
 
 let input = ''
@@ -85,9 +87,9 @@ function initMainPage(data) {
     initAuthorList(poemData)
     myText = new TextPanel(poemData, authorData);
     mySearchResults = new SearchResults(poemData, input, authorData)
-    const q = window.location.href.split('=')[1]
-    myText.wrangleData(+q)
-    updateResults()
+    // const q = window.location.href.split('=')[1]
+    // myText.wrangleData(+q)
+    updateResults('')
     // // // poem nlp // //  // 
     // const lemmatizedPoems = preprocessPoems(data);
     // calculateTfIdf(lemmatizedPoems);
@@ -106,12 +108,12 @@ function updateResults(givenAuthor) {
 }
 
 d3.select('#search').on('click', function () {
-    updateResults()
+    updateResults('')
 })
 
 d3.selectAll('#dropdown').on('change', function () {
-    var val = d3.select('#dropdown').property("value")
-    updateResults('Not specified')
+    // var val = d3.select('#dropdown').property("value")
+    updateResults('')
 })
 
 function choose(choices) {

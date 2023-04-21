@@ -14,14 +14,13 @@ class SearchResults {
         textBox.focus();
         textBox.select();
 
-        this.wrangleData()
+        this.wrangleData('')
     }
 
     wrangleData(givenAuthor) {
-        console.log('input at begin', givenAuthor)
         var input; var dropdownVal
 
-        if (givenAuthor != undefined) {
+        if (givenAuthor != '') {
             d3.select('#form1').property('value',givenAuthor)
             d3.select('#dropdown').property("value",'author')
         }
@@ -31,7 +30,6 @@ class SearchResults {
             input = d3.select('#thisauthor').text()
         }
         dropdownVal = d3.select('#dropdown').property("value")
-        console.log('dropdownVal', dropdownVal)
 
         let vis = this;
 
@@ -65,8 +63,6 @@ class SearchResults {
             // dataByInput = dataByInput.sort((a, b) => a.Author.split(' ')[1] > b.Author.split(' ')[1])
 
         } else {
-            console.log('input in else', input)
-            console.log('dealing with this data',vis.data)
             var dataByInput = vis.data.filter(function (d) {
                 if (!input) {
                     return false
@@ -79,7 +75,6 @@ class SearchResults {
                 return d.Author.toLowerCase().trim() == input.toLowerCase().trim()
             })
         }
-        console.log('databyinput', dataByInput)
         vis.updateVis(dataByInput);
 
     }
@@ -93,7 +88,6 @@ class SearchResults {
         let vis = this;
         var input = d3.select('#form1').property('value')
         var dropdownVal = d3.select('#dropdown').property("value")
-        console.log('thisinput', input)
         d3.selectAll("#results *").remove();
         d3.select('#resultCt').html('')
         var searchSubtitle = ''
@@ -144,9 +138,9 @@ class SearchResults {
         })
 
         data = data.sort((a, b) => a.date - b.date);
-        if (data.length > 0) {
-            myText.wrangleData(data[0].UniqueIndex)
-        }
+        // if (data.length > 0 ) {
+        //     myText.wrangleData(data[0].UniqueIndex)
+        // }
 
         var resultsByPoem = d3.select('#results').selectAll('.poemResult')
             .data(data)
@@ -212,7 +206,7 @@ class SearchResults {
         d3.selectAll('.poemResult').on('click', function () {
             var uniqueID = d3.select(this).attr('id').replaceAll('id', '')
             // window.history.pushState('object or string', 'Title', `/search/?q=${uniqueID}`)
-            console.log(uniqueID)
+            console.log('uniqueID',uniqueID)
             myText.wrangleData(uniqueID)
         }).on('mouseover', function () {
             d3.select(this).transition().style('background-color', 'rgba(176, 196, 222, 0.302)')

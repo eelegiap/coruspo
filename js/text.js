@@ -16,7 +16,7 @@ class TextPanel {
     wrangleData(id) {
         let vis = this;
         var thisPoem = this.data.find(d => d.UniqueIndex == id)
-
+        // console.log('thisPoem', thisPoem)
         this.updateVis(thisPoem)
         d3.selectAll('.poemResult').classed('border', false)
         d3.select('#id' + id).classed('border', true)
@@ -30,7 +30,7 @@ class TextPanel {
         let vis = this;
 
         var authorInfo = this.authorData[this.authorData.map(d => d.Author).indexOf(thisPoem.Author)]
-
+        // console.log('thisPoem in UpdateVis', thisPoem)
         d3.select('#poemTxt').html('')
         d3.select('#poemMeta').html('')
         d3.select('#poemMeta').html(function () {
@@ -46,7 +46,6 @@ class TextPanel {
                 'ROAR V3': 'Aug 24, 2022',
             }
             var date = thisPoem['Date posted'] != 'None' ? `${parseDate(new Date(thisPoem['Date posted']))}` : ''
-            console.log('date', date)
             if (date == '') {
                 date = `${dateObj[thisPoem.Source]}`
             }
@@ -61,9 +60,9 @@ class TextPanel {
         })
 
         var input = d3.select('#form1').property('value')
-
         var forHTML = thisPoem.Text.replaceAll('\n', '<br>')
 
+        // console.log('input in updatevis',input)
 
         var lineHTMLs = []
         thisPoem.nlpInfo.forEach(function (line, i) {
@@ -82,14 +81,12 @@ class TextPanel {
                     var matchesBold = lineHTML.match(regexBold)
                     if (matchesBold != null && matchesBold.length > 0) {
                         lineHTML = `<b>${matchesBold.pop()}</b>`
-                        console.log(lineHTML)
                     } else {
                         // check if italic
                         var regexItalic = /\*([^*]+)\*/i;
                         var matchesItalic = lineHTML.match(regexItalic)
                         if (matchesItalic != null && matchesItalic.length > 0) {
                             lineHTML = `<i>${matchesItalic.pop()}</i>`
-                            console.log(lineHTML)
                         }
                     }
                 }
