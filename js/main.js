@@ -22,7 +22,6 @@ async function loadData() {
 // Call loadData when the page is loaded
 window.addEventListener('DOMContentLoaded', loadData);
 
-
 d3.select('#poemContainer').style('max-height', $(window).height() * .6 + 'px')
 d3.select('#resultsContainer').style('max-height', $(window).height() * .55 + 'px')
 
@@ -68,14 +67,16 @@ function initAuthorList(poemData) {
 
             updateResults(d)
             $("body").animate({ scrollTop: 0 }, "fast");
-        }).on('mouseover',function(event, d) {
-            d3.select(this).style('font-weight','bold')
+        }).on('mouseover', function (event, d) {
+            d3.select(this).style('font-weight', 'bold')
         })
-        .on('mouseout',function(event, d) {
-            d3.select(this).style('font-weight','')
+        .on('mouseout', function (event, d) {
+            d3.select(this).style('font-weight', '')
         })
 }
-
+function daysIntoYear(date) {
+    return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
+}
 let input = ''
 // initMainPage
 function initMainPage(data) {
@@ -84,8 +85,18 @@ function initMainPage(data) {
     let authorData = data[1];
     // filter to after only
     poemData = poemData.filter(d => d['Before or after'] == 'After')
-    console.log(poemData.length)
     initAuthorList(poemData)
+    // initialize poem of the day
+    // add poem of the day
+    const d = new Date();
+    d3.select('#todaysdate').text(parseDate(d))
+    var todayspoem = poemData[daysIntoYear(d)]
+    d3.select('#podauthor').text(todayspoem.Author)
+    d3.select('#podsource').text(todayspoem.Source)
+    var podtext = todayspoem.Text.split('\n').map(d => `<span>${d}<span><br>`).join('')
+    d3.select('#podtext').html(podtext)
+
+    // initialize search page
     myText = new TextPanel(poemData, authorData);
     mySearchResults = new SearchResults(poemData, input, authorData)
     // const q = window.location.href.split('=')[1]
